@@ -33,6 +33,7 @@ This is a e-commerce platform with functionalities to users such as user managem
 ##Configuration
 --Section to document configurations such as credentials for DB
 --Here can be documented PORTS and base_urls used for each microservice.
+APACHE uses defaults ports 80 (HTTP) & 443 (HTTPS)
 
 ##usage
 --This part explains how to use application, which parts should be activated and how to make the program work
