@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>Test API</h1>
+    <!--<form id="apiForm">
+        <input type="hidden" name="action" value="testApi">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name"><br><br>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email"><br><br>
+        <button type="button" onclick="sendApiRequest()">Send Request</button>
+    </form>-->
+
+    <button type="button" onclick="sendApiRequest()">Send Request</button>
+
+    <div id="response"></div>
+
+    <script>
+        function sendApiRequest() {
+            var data = "Hello World";
+            
+
+            fetch('../server/ApiConnection/apiconnection.php',
+            {
+                method: 'POST',
+                body: data
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('response').textContent = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('response').textContent = 'An error occurred.';
+            });
+        }
+    </script>
+</body>
+</html>

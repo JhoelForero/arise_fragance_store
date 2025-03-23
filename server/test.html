@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+<body>
+
+    <button id="login" type="button">login</button>
+    <button id="register" type="button">register</button>
+
+    <p id="responseText"></p>
+
+    <script>
+        const login = document.getElementById('login');
+        login.addEventListener('click', () => {
+            fetch(`/server/login.php`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'username': 'Arthur',
+                    'password': 'scharf'
+                })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then((text) => {
+                    console.log('Response Text: ', text);
+                    document.getElementById('responseText').textContent = text;
+                })
+                .catch(error => {
+                    console.error('Fetch error: ', error);
+                })
+        });//~ addEventListener
+
+
+
+        const register = document.getElementById('register');
+        register.addEventListener('click', () => {
+            fetch(`/server/register.php`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'username': 'Arthur',
+                    'password': 'scharf'
+                })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then((text) => {
+                    console.log('Response Text: ', text);
+                    document.getElementById('responseText').textContent = text;
+                })
+                .catch(error => {
+                    console.error('Fetch error: ', error);
+                })
+        });//~ addEventListener
+
+
+
+    </script>
+</body>
+</html>
