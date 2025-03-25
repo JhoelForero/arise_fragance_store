@@ -51,8 +51,6 @@ for (let i = 0; i < accordionBtn.length; i++) {
 // FILTERS & SEARCH
 // ---------------------
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ JS Loaded & DOM Ready");
-
   const genderFilter = document.getElementById("availabilityFilter");
   const brandFilter = document.getElementById("brandFilter");
   const searchInput = document.getElementById("searchInput");
@@ -72,8 +70,6 @@ function filterProducts() {
   const searchTerm = document.getElementById("searchInput").value.toLowerCase();
   const products = document.querySelectorAll(".product");
 
-  console.log(`🔍 Filtering - Gender: ${selectedGender}, Brand: ${selectedBrand}, Search: ${searchTerm}`);
-
   products.forEach(product => {
     const productGender = product.getAttribute("data-gender");
     const productBrand = product.getAttribute("data-brand");
@@ -83,48 +79,17 @@ function filterProducts() {
     const brandMatch = selectedBrand === "all" || productBrand === selectedBrand;
     const searchMatch = productTitle.includes(searchTerm);
 
-    if (genderMatch && brandMatch && searchMatch) {
-      product.style.display = "block";
-    } else {
-      product.style.display = "none";
-    }
+    product.style.display = (genderMatch && brandMatch && searchMatch) ? "block" : "none";
   });
 }
-
-// ---------------------
-// CART
-// ---------------------
-
-// ----------------------
-// MINI CART HOVER LOGIC
-// ----------------------
-const cartIcon = document.getElementById("cartIcon");
-const miniCart = document.getElementById("miniCart");
-
-cartIcon.addEventListener("mouseenter", () => {
-  miniCart.style.display = "block";
-});
-
-miniCart.addEventListener("mouseleave", () => {
-  miniCart.style.display = "none";
-});
-
-cartIcon.addEventListener("mouseleave", () => {
-  setTimeout(() => {
-    if (!miniCart.matches(":hover")) {
-      miniCart.style.display = "none";
-    }
-  }, 300);
-});
 
 // -----------------------------
 // CART FUNCTIONALITY + STORAGE
 // -----------------------------
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Wait for DOM content
 document.addEventListener("DOMContentLoaded", () => {
-  // Setup Add to Cart buttons
+  // Add to Cart
   document.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const productEl = btn.closest(".product");
@@ -145,11 +110,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  updateMiniCart(); // Initial load
+  updateMiniCart(); // Load cart items
 });
 
 // ------------------------
-// UPDATE MINI CART UI
+// MINI CART UI UPDATE
 // ------------------------
 function updateMiniCart() {
   const cartItemsContainer = document.getElementById("miniCartItems");
@@ -185,7 +150,6 @@ function updateMiniCart() {
   cartSubtotal.textContent = total.toFixed(2);
   if (cartCount) cartCount.textContent = count;
 
-  // ✅ Add remove button event listeners here
   document.querySelectorAll(".remove-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const index = btn.getAttribute("data-index");
@@ -196,39 +160,68 @@ function updateMiniCart() {
   });
 }
 
-// procced to checkout button 
+// ---------------------
+// MINI CART DESKTOP HOVER
+// ---------------------
+const cartIcon = document.getElementById("cartIcon");
+const miniCart = document.getElementById("miniCart");
+
+if (cartIcon && miniCart) {
+  cartIcon.addEventListener("mouseenter", () => {
+    miniCart.style.display = "block";
+  });
+
+  cartIcon.addEventListener("mouseleave", () => {
+    setTimeout(() => {
+      if (!miniCart.matches(":hover")) {
+        miniCart.style.display = "none";
+      }
+    }, 300);
+  });
+
+  miniCart.addEventListener("mouseleave", () => {
+    miniCart.style.display = "none";
+  });
+}
+
+// ------------------------
+// PROCEED TO CART PAGE
+// ------------------------
 document.querySelector(".view-cart-btn").addEventListener("click", () => {
-  window.location.href = "/mybag.html"; // or wherever your full cart page is
+  window.location.href = "/mybag.html";
 });
 
 document.querySelector(".checkout-btn").addEventListener("click", () => {
-  window.location.href = "/mybag.html"; // create this page or adjust the path
+  window.location.href = "/mybag.html";
 });
 
-
-// USER DROPDOWN LOGIC
+// ------------------------
+// USER DROPDOWN DESKTOP
+// ------------------------
 const userIcon = document.querySelector(".header-user-actions button:nth-child(1)");
 const userDropdown = document.getElementById("userDropdown");
 
-userIcon.addEventListener("mouseenter", () => {
-  userDropdown.style.display = "block";
-});
+if (userIcon && userDropdown) {
+  userIcon.addEventListener("mouseenter", () => {
+    userDropdown.style.display = "block";
+  });
 
-userDropdown.addEventListener("mouseleave", () => {
-  userDropdown.style.display = "none";
-});
+  userIcon.addEventListener("mouseleave", () => {
+    setTimeout(() => {
+      if (!userDropdown.matches(":hover")) {
+        userDropdown.style.display = "none";
+      }
+    }, 300);
+  });
 
-userIcon.addEventListener("mouseleave", () => {
-  setTimeout(() => {
-    if (!userDropdown.matches(":hover")) {
-      userDropdown.style.display = "none";
-    }
-  }, 300);
-});
+  userDropdown.addEventListener("mouseleave", () => {
+    userDropdown.style.display = "none";
+  });
+}
 
-
-// Make mobile nav buttons behave like desktop
-
+// ------------------------
+// MOBILE NAVIGATION LOGIC
+// ------------------------
 document.getElementById("mobileHomeBtn").addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
@@ -241,26 +234,13 @@ document.getElementById("mobileSearchBtn").addEventListener("click", () => {
   }
 });
 
-document.getElementById("mobileUserBtn").addEventListener("mouseenter", () => {
-  document.getElementById("userDropdown").style.display = "block";
+// ✅ Replaced hover logic with click toggles for mobile buttons
+document.getElementById("mobileUserBtn").addEventListener("click", () => {
+  const dropdown = document.getElementById("userDropdown");
+  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
 });
 
-document.getElementById("mobileUserBtn").addEventListener("mouseleave", () => {
-  setTimeout(() => {
-    if (!document.getElementById("userDropdown").matches(":hover")) {
-      document.getElementById("userDropdown").style.display = "none";
-    }
-  }, 300);
-});
-
-document.getElementById("mobileCartBtn").addEventListener("mouseenter", () => {
-  document.getElementById("miniCart").style.display = "block";
-});
-
-document.getElementById("mobileCartBtn").addEventListener("mouseleave", () => {
-  setTimeout(() => {
-    if (!document.getElementById("miniCart").matches(":hover")) {
-      document.getElementById("miniCart").style.display = "none";
-    }
-  }, 300);
+document.getElementById("mobileCartBtn").addEventListener("click", () => {
+  const cart = document.getElementById("miniCart");
+  cart.style.display = cart.style.display === "block" ? "none" : "block";
 });

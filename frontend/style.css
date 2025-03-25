@@ -680,51 +680,16 @@ header {
 }
 
 /* ======================================
-   RESPONSIVE STYLES
+   Menu Mobile 
 ====================================== */
-@media (max-width: 768px) {
-  /* Hide desktop navigation on mobile */
-  .desktop-navigation-menu {
-    display: none;
-  }
-  
-  /* Show mobile bottom navigation */
-  .mobile-bottom-navigation {
-    display: flex;
-    justify-content: space-around;
-    padding: 1rem;
-    background-color: #fff;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-  
-  /* Mobile navigation menu style */
-  .mobile-navigation-menu {
-    display: block;
-    background-color: #fff;
-    padding: 1rem;
-    position: fixed;
-    bottom: 60px;
-    width: 100%;
-    z-index: 1000;
-    max-height: 60vh;
-    overflow-y: auto;
-  }
-}
 
-/* Hide mobile bottom nav by default (for desktop) */
+/* Hide mobile nav by default (desktop) */
 .mobile-bottom-nav {
   display: none;
 }
 
-/* ======================================
-   MOBILE-SPECIFIC STYLES
-====================================== */
+/* Show only on mobile */
 @media (max-width: 768px) {
-  /* Show mobile bottom navigation on small screens */
   .mobile-bottom-nav {
     display: flex;
     justify-content: space-around;
@@ -735,12 +700,11 @@ header {
     right: 0;
     background-color: #000000;
     padding: 0.7rem 1rem;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #ffffff;
     box-shadow: 0 -2px 10px rgba(255, 254, 254, 0.05);
     z-index: 9999;
   }
-  
-  /* Mobile navigation buttons */
+
   .mobile-nav-btn {
     display: flex;
     flex-direction: column;
@@ -753,77 +717,25 @@ header {
     cursor: pointer;
     position: relative;
   }
-  
-  /* Mobile nav icons */
+
   .mobile-nav-btn ion-icon {
     font-size: 22px;
     margin-bottom: 2px;
   }
-  
-  /* Mobile cart count badge */
+
   .mobile-nav-btn .count {
     position: absolute;
     top: -5px;
     right: -8px;
     background: #323fb5;
-    color: #fff;
+    color: #ffffff;
     font-size: 11px;
     padding: 2px 5px;
     border-radius: 50%;
   }
-  
-  /* Hide desktop header actions on mobile */
+
   .header-user-actions {
     display: none;
   }
 }
 
-/* ===================
-   MY BAG PAGE STYLES
-====================== */
-.checkout-container {
-  padding: 40px 20px;
-  max-width: 1200px;
-  margin: 100px auto 60px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-}
-
-.checkout-left,
-.checkout-right {
-  flex: 1;
-  min-width: 300px;
-}
-
-.order-summary-box {
-  background: #f9f9f9;
-  border-radius: 10px;
-  padding: 20px;
-}
-
-.order-summary-box .row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 15px;
-}
-
-.order-summary-box .row.total {
-  font-weight: bold;
-  margin-top: 20px;
-  font-size: 17px;
-}
-
-.place-order-btn {
-  width: 100%;
-  background: #b30000;
-  color: white;
-  border: none;
-  padding: 12px;
-  margin-top: 20px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-}

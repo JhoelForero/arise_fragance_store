@@ -1,0 +1,501 @@
+/* ======================================
+   BASE STYLES AND RESET
+====================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: #000000;
+  background-color: #fff;
+  scroll-behavior: smooth;
+  /* Add padding for fixed header and mobile bottom nav */
+  padding-top: 60px;
+  padding-bottom: 70px; /* space for bottom nav */
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ======================================
+   UTILITY CLASSES
+====================================== */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ======================================
+   HEADER STYLES
+====================================== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #000000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-top {
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px; /* Reduced height for better mobile experience */
+}
+
+/* Logo styling */
+.site-logo img {
+  height: 60px; /* Reduced size */
+  width: auto;
+  display: block;
+}
+
+/* Header title (if needed) */
+.header-top h1 {
+  font-size: 2rem;
+  color: #000000;
+}
+
+/* Social media container in header */
+.header-social-container {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Alert/news banner in header */
+.header-alert-news {
+  background: #000000;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #ffffff;
+}
+
+/* User action buttons (cart, user, etc) */
+.header-user-actions .action-btn {
+  margin-left: 1rem;
+  font-size: 1.5rem;
+  color: #ffffff;
+  position: relative;
+}
+
+/* Count badge for cart items */
+.count {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: #323fb5;
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 2px 5px;
+  border-radius: 50%;
+}
+
+/* ======================================
+   CART & USER DROPDOWNS
+====================================== */
+.header-user-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.cart-wrapper,
+.user-wrapper {
+  position: relative;
+}
+
+/* Shared dropdown styles */
+.mini-cart,
+.user-dropdown {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  padding: 15px;
+  display: none;
+  z-index: 1001;
+}
+
+/* Toggle dropdown visibility on hover */
+.cart-wrapper:hover .mini-cart,
+.user-wrapper:hover .user-dropdown {
+  display: block;
+}
+
+/* Cart icon notification counter */
+.count {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 0.7rem;
+  padding: 2px 5px;
+  border-radius: 50%;
+}
+
+/* ======================================
+   MINI CART STYLING
+====================================== */
+/* Mini cart header area */
+.mini-cart-header {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+/* Scrollable area for cart items */
+.mini-cart-items {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Individual cart item */
+.mini-cart-item {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+/* Product in cart styling */
+.mini-cart-product {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* Cart product image */
+.mini-cart-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Product info in cart */
+.mini-cart-info {
+  flex: 1;
+}
+
+/* Remove button for cart items */
+.remove-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Cart action buttons */
+.view-cart-btn,
+.checkout-btn {
+  width: 100%;
+  padding: 10px 15px;
+  margin-top: 10px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* View cart button style */
+.view-cart-btn {
+  background-color: #fff;
+  color: #000000;
+  border: 1px solid #000;
+}
+
+.view-cart-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* Checkout button style */
+.checkout-btn {
+  background-color: #000;
+  color: #fff;
+  border: none;
+}
+
+.checkout-btn:hover {
+  background-color: #0d0053;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fff;
+    margin: 0;
+    padding: 40px;
+    color: #111;
+  }
+  
+  .cart-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .cart-left {
+    flex: 2;
+  }
+  
+  .cart-left h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  .free-shipping {
+    font-weight: 500;
+    color: green;
+    margin-bottom: 30px;
+  }
+  
+  .cart-item {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    align-items: flex-start;
+  }
+  
+  .cart-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  
+  .cart-item .info {
+    flex: 1;
+  }
+  
+  .cart-item h4 {
+    margin: 0 0 5px;
+    font-size: 18px;
+  }
+  
+  .cart-item select, .cart-item .qty {
+    margin-top: 5px;
+  }
+  
+  .qty {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+  }
+  
+  .qty button {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .qty input {
+    width: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+  
+  .cart-item .wishlist {
+    margin-top: 10px;
+    font-size: 13px;
+    color: gray;
+    cursor: pointer;
+  }
+  
+  .final-sale-note {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  
+  .cart-summary {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    height: fit-content;
+  }
+  
+  .discount-banner {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .code-tag {
+    display: inline-block;
+    background: #b22222;
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+  }
+  
+  .discount-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .discount-box input {
+    flex: 1;
+    padding: 8px;
+  }
+  
+  .discount-box button {
+    background: green;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .applied-discount {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .discount-label {
+    background: #eee;
+    padding: 5px 10px;
+    border-radius: 20px;
+  }
+  
+  .discount-line {
+    color: red;
+  }
+  
+  .total {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .checkout-btn {
+    width: 100%;
+    background: black;
+    color: white;
+    padding: 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  
+  /* ======================================
+   FOOTER STYLES
+====================================== */
+.footer {
+    background-color: #000000;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #ffffff;
+  }
+  
+  /* ======================================
+     Menu Mobile 
+  ====================================== */
+  
+  /* Hide mobile nav by default (desktop) */
+  .mobile-bottom-nav {
+    display: none;
+  }
+  
+  /* Show only on mobile */
+  @media (max-width: 768px) {
+    .mobile-bottom-nav {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #000000;
+      padding: 0.7rem 1rem;
+      border-top: 1px solid #ffffff;
+      box-shadow: 0 -2px 10px rgba(255, 254, 254, 0.05);
+      z-index: 9999;
+    }
+  
+    .mobile-nav-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 13px;
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      position: relative;
+    }
+  
+    .mobile-nav-btn ion-icon {
+      font-size: 22px;
+      margin-bottom: 2px;
+    }
+  
+    .mobile-nav-btn .count {
+      position: absolute;
+      top: -5px;
+      right: -8px;
+      background: #323fb5;
+      color: #ffffff;
+      font-size: 11px;
+      padding: 2px 5px;
+      border-radius: 50%;
+    }
+  
+    .header-user-actions {
+      display: none;
+    }
+  }

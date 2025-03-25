@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arise - Fragrances</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/logo/Arise .png" type="image/x-icon">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/product.css">
+  
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="overlay" data-overlay></div>
+
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    
+    <!-- Logo -->
+    <a href="/" class="site-logo">
+      <img src="/logo/arise.png" alt="Arise Logo">
+    </a>
+
+    <!-- User and Cart Actions -->
+    <div class="header-user-actions">
+
+      <!-- User Icon + Dropdown -->
+      <div class="user-wrapper">
+        <button class="action-btn" id="userIcon">
+          <ion-icon name="person-outline"></ion-icon>
+        </button>
+        <div class="user-dropdown" id="userDropdown">
+          <p>Welcome, <strong id="usernameDisplay">Guest</strong></p>
+          <button class="login-btn" onclick="window.location.href='/login.html'">Login</button>
+        </div>
+      </div>
+
+      <!-- Cart Icon + Mini Cart -->
+      <div class="cart-wrapper">
+        <button class="action-btn" id="cartIcon">
+          <ion-icon name="bag-handle-outline"></ion-icon>
+          <span class="count" id="cartCount">0</span>
+        </button>
+        <div class="mini-cart" id="miniCart">
+          <div class="mini-cart-header">
+            <p>Subtotal: <strong>CAD $<span id="cartSubtotal">0.00</span></strong></p>
+            
+            <!-- Updated buttons with links -->
+            <button class="view-cart-btn" onclick="window.location.href='mybag.html'">View Bag</button>
+            <button class="checkout-btn" onclick="window.location.href='mybag.html'">Proceed to Checkout</button>
+          </div>
+      
+          <div class="mini-cart-items" id="miniCartItems">
+            <!-- Products will be injected here -->
+          </div>
+        </div>
+      </div>
+      
+
+    </div>
+  </div>
+</header>
+<body>
+
+  <div class="container">
+    <div class="product-page">
+
+      <!-- Left: Product Image -->
+      <div class="product-image">
+        <img src="/images/product1.jpg" alt="Jean Paul Gaultier Le Male Elixir Parfum" />
+      </div>
+
+      <!-- Right: Product Details -->
+      <div class="product-details">
+        <nav class="breadcrumb">
+          Home / Mens Retail Bottles / Jean Paul Gaultier Le Male Elixir Parfum
+        </nav>
+
+        <h1 class="product-title">Jean Paul Gaultier Le Male Elixir Parfum</h1>
+        <p class="price">$150.00</p>
+        <p class="installments">or 4 interest-free payments of $58.25 with <strong>Afterpay</strong></p>
+
+        <div class="rating">★★★★★  reviews</div>
+
+        <div class="price-box">
+          <label>PRICE</label>
+          <p class="main-price">$150.00</p>
+        </div>
+
+        <div class="quantity-cart">
+          <div class="quantity-selector">
+            <button>-</button>
+            <input type="text" value="1" readonly>
+            <button>+</button>
+          </div>
+          <button class="add-to-cart">ADD TO CART</button>
+        </div>
+
+        <div class="authenticity">
+          <p><strong>✅ 100% Authentic</strong><br>Every decant and full-size bottle we offer is genuine, sourced directly from trusted fragrance suppliers.</p>
+        </div>
+
+        <div class="description">
+          <h3>Description</h3>
+          <p>
+            Jean Paul Gaultier Le Male Elixir Parfum is an intense and seductive Amber Fougere fragrance for men. 
+            A fresh blend of lavender and mint meets the warmth of vanilla, benzoin, honey, tobacco, and tonka bean 
+            for a bold and alluring scent.
+          </p>
+          <ul>
+            <li><strong>Concentration:</strong> Extrait de parfum</li>
+            <li><strong>Gender:</strong> Men</li>
+            <li><strong>Scent Accord:</strong> Sweet and Gourmand</li>
+            <li><strong>Prominent Notes:</strong> Vanilla, Honey, Tonka Bean, and Lavender</li>
+            <li><strong>Season:</strong> Fall and Winter</li>
+            <li><strong>Occasion:</strong> Evening and Night Out</li>
+            <li><strong>Perfumer:</strong> Quentin Bisch</li>
+          </ul>
+
+          <h3>Fragrance Notes</h3>
+          <ul>
+            <li><strong>Top:</strong> Lavender and Mint</li>
+            <li><strong>Heart:</strong> Vanilla and Benzoin</li>
+            <li><strong>Base:</strong> Honey, Tonka Bean and Tobacco</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--Footer-->
+<footer class="footer">
+  <p class="copyright">© <span id="current-year"></span> Arise. All rights reserved.</p>
+</footer>
+
+  <!--custom js link-->
+  <script src="/script.js"></script>
+
+      <!-- ionicon link-->
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<!-- Script-->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const quantityInput = document.querySelector('.quantity-selector input');
+    const minusBtn = document.querySelector('.quantity-selector button:first-child');
+    const plusBtn = document.querySelector('.quantity-selector button:last-child');
+    const addToCartBtn = document.querySelector('.add-to-cart');
+  
+    minusBtn.addEventListener('click', () => {
+      let currentVal = parseInt(quantityInput.value);
+      if (currentVal > 1) quantityInput.value = currentVal - 1;
+    });
+  
+    plusBtn.addEventListener('click', () => {
+      let currentVal = parseInt(quantityInput.value);
+      quantityInput.value = currentVal + 1;
+    });
+  
+    addToCartBtn.addEventListener('click', () => {
+      const product = {
+        id: "jp-le-male-elixir",
+        name: "Jean Paul Gaultier Le Male Elixir Parfum",
+        price: 233.00,
+        quantity: parseInt(quantityInput.value),
+        image: "/images/jp2.png"
+      };
+  
+      let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+      const existing = cart.find(item => item.id === product.id);
+      if (existing) {
+        existing.quantity += product.quantity;
+      } else {
+        cart.push(product);
+      }
+  
+      localStorage.setItem("cartItems", JSON.stringify(cart));
+      updateCartUI();
+    });
+  
+    function updateCartUI() {
+      const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+      const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const cartSubtotal = cart.reduce((sum, item) => sum + (item.quantity * item.price), 0);
+  
+      // Update cart counters
+      document.getElementById("cartCount").textContent = cartCount;
+      document.getElementById("mobileCartCount").textContent = cartCount;
+      document.getElementById("cartSubtotal").textContent = cartSubtotal.toFixed(2);
+  
+      // Render mini cart items
+      const cartContainer = document.getElementById("miniCartItems");
+      cartContainer.innerHTML = "";
+  
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+      } else {
+        cart.forEach((item, index) => {
+          const div = document.createElement("div");
+          div.classList.add("mini-cart-item");
+          div.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+              <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover;">
+              <div style="flex: 1;">
+                <p style="margin: 0; font-weight: 600;">${item.name}</p>
+                <div style="display: flex; align-items: center; gap: 5px; margin: 5px 0;">
+                  <button class="mini-minus" data-index="${index}">-</button>
+                  <input type="text" value="${item.quantity}" readonly style="width: 30px; text-align: center;">
+                  <button class="mini-plus" data-index="${index}">+</button>
+                </div>
+                <small>Price: $${(item.price * item.quantity).toFixed(2)}</small>
+              </div>
+              <button class="mini-remove" data-index="${index}" style="background: none; border: none; font-size: 18px; color: red; cursor: pointer;">&times;</button>
+            </div>
+          `;
+          cartContainer.appendChild(div);
+        });
+  
+        // Attach event listeners for all quantity & remove buttons
+        document.querySelectorAll('.mini-plus').forEach(btn => {
+          btn.addEventListener('click', e => {
+            let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+            const i = parseInt(e.target.dataset.index);
+            cart[i].quantity++;
+            localStorage.setItem("cartItems", JSON.stringify(cart));
+            updateCartUI();
+          });
+        });
+  
+        document.querySelectorAll('.mini-minus').forEach(btn => {
+          btn.addEventListener('click', e => {
+            let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+            const i = parseInt(e.target.dataset.index);
+            if (cart[i].quantity > 1) {
+              cart[i].quantity--;
+              localStorage.setItem("cartItems", JSON.stringify(cart));
+              updateCartUI();
+            }
+          });
+        });
+  
+        document.querySelectorAll('.mini-remove').forEach(btn => {
+          btn.addEventListener('click', e => {
+            let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+            const i = parseInt(e.target.dataset.index);
+            cart.splice(i, 1);
+            localStorage.setItem("cartItems", JSON.stringify(cart));
+            updateCartUI();
+          });
+        });
+      }
+    }
+  
+    updateCartUI();
+  });
+  </script>
+  
+ 
+<!--Mobile View-->
+<div class="mobile-bottom-nav">
+  <button class="mobile-nav-btn" id="mobileHomeBtn">
+    <ion-icon name="home-outline"></ion-icon>
+    <span>Home</span>
+  </button>
+  <button class="mobile-nav-btn" id="mobileSearchBtn">
+    <ion-icon name="search-outline"></ion-icon>
+    <span>Search</span>
+  </button>
+  <button class="mobile-nav-btn" id="mobileUserBtn">
+    <ion-icon name="person-outline"></ion-icon>
+    <span>Account</span>
+  </button>
+  <button class="mobile-nav-btn" id="mobileCartBtn">
+    <ion-icon name="bag-handle-outline"></ion-icon>
+    <span>Cart</span>
+    <span class="count" id="mobileCartCount">0</span>
+  </button>
+</div>
+
+</body>
+</html>
+

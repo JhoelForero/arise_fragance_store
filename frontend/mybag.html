@@ -3,86 +3,152 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Bag - Arise</title>
-  <link rel="stylesheet" href="/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <title>Arise - Fragrances</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/logo/Arise .png" type="image/x-icon">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/cart.css">
+  
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <header>
-    <div class="header-top">
-      <a href="/" class="site-logo">
-        <img src="/logo/arise.png" alt="Arise Logo">
-      </a>
-    </div>
-  </header>
 
-  <main class="checkout-container" style="margin-top: 100px; padding: 40px 20px; max-width: 1000px; margin-left: auto; margin-right: auto;">
-    <h2 style="text-align: center; font-size: 28px; margin-bottom: 30px; color: #b30000;">My Bag</h2>
+  <div class="overlay" data-overlay></div>
 
-    <form class="checkout-form" style="display: flex; flex-wrap: wrap; gap: 40px;">
-      <!-- Billing Info -->
-      <div style="flex: 1; min-width: 300px;">
-        <h3 style="margin-bottom: 15px;">Billing Information</h3>
-        <label>Full Name</label>
-        <input type="text" placeholder="John Doe" required>
 
-        <label>Email</label>
-        <input type="email" placeholder="john@example.com" required>
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    
+    <!-- Logo -->
+    <a href="/" class="site-logo">
+      <img src="/logo/arise.png" alt="Arise Logo">
+    </a>
 
-        <label>Phone Number</label>
-        <input type="tel" placeholder="123-456-7890" required>
+    <!-- User and Cart Actions -->
+    <div class="header-user-actions">
 
-        <label>Address</label>
-        <input type="text" placeholder="123 Main St" required>
-
-        <label>City</label>
-        <input type="text" placeholder="Ottawa" required>
-
-        <label>Postal Code</label>
-        <input type="text" placeholder="K2G 1V8" required>
-
-        <label>Country</label>
-        <select required>
-          <option value="Canada">Canada</option>
-          <option value="USA">USA</option>
-          <option value="Other">Other</option>
-        </select>
+      <!-- User Icon + Dropdown -->
+      <div class="user-wrapper">
+        <button class="action-btn" id="userIcon">
+          <ion-icon name="person-outline"></ion-icon>
+        </button>
+        <div class="user-dropdown" id="userDropdown">
+          <p>Welcome, <strong id="usernameDisplay">Guest</strong></p>
+          <button class="login-btn" onclick="window.location.href='/login.html'">Login</button>
+        </div>
       </div>
 
-      <!-- Order Summary -->
-      <div style="flex: 1; min-width: 300px;">
-        <h3 style="margin-bottom: 15px;">Order Summary</h3>
-        <div class="order-summary-box" style="background: #f9f9f9; padding: 20px; border-radius: 10px;">
-          <div class="order-item" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-            <span>Product 1</span>
-            <span>$150.00</span>
+      <!-- Cart Icon + Mini Cart -->
+      <div class="cart-wrapper">
+        <button class="action-btn" id="cartIcon">
+          <ion-icon name="bag-handle-outline"></ion-icon>
+          <span class="count" id="cartCount">0</span>
+        </button>
+        <div class="mini-cart" id="miniCart">
+          <div class="mini-cart-header">
+            <p>Subtotal: <strong>CAD $<span id="cartSubtotal">0.00</span></strong></p>
+            
+            <!-- Updated buttons with links -->
+            <button class="view-cart-btn" onclick="window.location.href='mybag.html'">View Bag</button>
+            <button class="checkout-btn" onclick="window.location.href='mybag.html'">Proceed to Checkout</button>
           </div>
-          <div class="order-item" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-            <span>Product 2</span>
-            <span>$130.00</span>
-          </div>
-          <hr>
-          <div class="order-total" style="display: flex; justify-content: space-between; font-weight: bold; margin-top: 10px;">
-            <span>Total</span>
-            <span>$280.00</span>
+      
+          <div class="mini-cart-items" id="miniCartItems">
+            <!-- Products will be injected here -->
           </div>
         </div>
-
-        <button type="submit" style="margin-top: 20px; width: 100%; padding: 12px; background-color: #b30000; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer;">Place Order</button>
       </div>
-    </form>
-  </main>
+      
 
-  <footer class="footer" style="margin-top: 60px;">
-    <p>© <span id="current-year"></span> Arise. All rights reserved.</p>
-  </footer>
+    </div>
+  </div>
+</header>
 
-  <script>
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-  </script>
+<div class="cart-container">
+
+  <!-- Left Side: Cart Items -->
+  <div class="cart-left">
+    <h1>MY BAG <span id="item-count">(0 items)</span></h1>
+    <p class="free-shipping">You are <strong>CAD $<span id="shipping-gap">0.00</span></strong> away from Free Shipping!</p>
+
+    <div id="cart-items">
+      <!-- JavaScript will render items here -->
+    </div>
+
+    <p class="final-sale-note">⚠️ Some items in your bag are Final Sale.</p>
+  </div>
+
+  <!-- Right Side: Summary Box -->
+  <div class="cart-summary">
+    <div class="discount-banner">
+      <p>40% Off EVERYTHING! Use Code:</p>
+      <span class="code-tag">Arise</span>
+    </div>
+
+    <div class="discount-box">
+      <input type="text" id="discount-input" placeholder="Enter discount code">
+      <button id="apply-discount">Apply</button>
+    </div>
+
+    <div id="active-discount" class="applied-discount" style="display: none;">
+      <span class="discount-label">Arise</span>
+      <button id="remove-discount">×</button>
+    </div>
+
+    <div class="totals">
+      <p>Subtotal: <strong>CAD $<span id="subtotal">0.00</span></strong></p>
+      <p class="discount-line" style="display: none;">Discount <span class="discount-code">Arise</span>: <span class="discount-amount">–CAD $<span id="discount-value">0.00</span></span></p>
+      <p>Estimated Shipping: <span>Calculated at Checkout</span></p>
+      <p>Estimated Taxes: <span>Calculated at Checkout</span></p>
+      <hr />
+      <p class="total">Total: <strong>CAD $<span id="total">0.00</span></strong></p>
+    </div>
+
+    <button class="checkout-btn">Proceed to Checkout</button>
+  </div>
+</div>
+<!--Footer-->
+<footer class="footer">
+  <p class="copyright">© <span id="current-year"></span> Arise. All rights reserved.</p>
+</footer>
+
+  <!--custom js link-->
+  <script src="/script.js"></script>
+
+      <!-- ionicon link-->
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+      <!--Mobile View-->
+<div class="mobile-bottom-nav">
+  <button class="mobile-nav-btn" id="mobileHomeBtn">
+    <ion-icon name="home-outline"></ion-icon>
+    <span>Home</span>
+  </button>
+  <button class="mobile-nav-btn" id="mobileSearchBtn">
+    <ion-icon name="search-outline"></ion-icon>
+    <span>Search</span>
+  </button>
+  <button class="mobile-nav-btn" id="mobileUserBtn">
+    <ion-icon name="person-outline"></ion-icon>
+    <span>Account</span>
+  </button>
+  <button class="mobile-nav-btn" id="mobileCartBtn">
+    <ion-icon name="bag-handle-outline"></ion-icon>
+    <span>Cart</span>
+    <span class="count" id="mobileCartCount">0</span>
+  </button>
+</div>
+
+<script src="cart.js"></script>
 </body>
-
 </html>
