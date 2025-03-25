@@ -739,3 +739,52 @@ header {
   }
 }
 
+/* ===================
+   MY BAG PAGE STYLES
+====================== */
+.checkout-container {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 100px auto 60px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.checkout-left,
+.checkout-right {
+  flex: 1;
+  min-width: 300px;
+}
+
+.order-summary-box {
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.order-summary-box .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.order-summary-box .row.total {
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 17px;
+}
+
+.place-order-btn {
+  width: 100%;
+  background: #b30000;
+  color: white;
+  border: none;
+  padding: 12px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
