@@ -4,13 +4,18 @@ SQL queries ??
 
 
 ---- User ----
-create new user
 
+
+
+authenticate
 login to new user
 logout 
 	> Client receives logged in state ONCE from the server, and stores this state
 	  as a cookie. once client has cookie, it just assumes it's logged in.
 	  There is no session data
+
+
+
 
 
 

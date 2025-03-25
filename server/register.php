@@ -1,65 +1,38 @@
 <?php
 
-
-// Min Characters for legal password & username
-const MIN_LENGTH = 8;
-
-
-
-/* -- Expects --
+if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-	username: ___,
-	password: ___
-}
-*/
-$method = $_SERVER['REQUEST_METHOD'];					 
-$body   = json_decode(file_get_contents('php://input'), true); // get contents of body as json object
+	$username = $_POST["username"];
+	$password = $_POST["password"];
+	$fullName = $_POST["fullname"];
+	$email    = $_POST["email"];
 
 
-if ($method != 'POST')
-{
-	echo 'Bad request. Wrong method';
-}
+	// -- Checking -- //
+	// TODO: check for duplicate usernames
 
+	try{
+		require_once "db.php";
 
-$username = $body['username'];
-$password = $body['password'];
+		$query = "INSERT INTO users (username, password, fullName, email) VALUES (?, ?, ?, ?);";
 
-echo "Register: " . $username . " " . $password;
-die();
+		$stmt = $pdo->prepare($query);
 
-// -- Does Username already exist? -- //
-// TODO: query db
+		$stmt->execute([$username, $password, $fullName, $email]);
 
+		// -- Freeing resources -- //
+		$pdo = null;
+		$pdo = null;
 
-
-// ---- Are username & password valid? ---- //
-// -- Proper length
-if (strlen($username) < MIN_LENGTH)
-{
-	return false;
-}
-if (strlen($password) < MIN_LENGTH)
-{
-	return false;
-}
-		
-
-
-	
-//-- Password has 1 letter, number, special character?
-
-/*$bHasSpecialCharacter = false;
-for ($i = 0; $i < strlen($password); $i++)
-{
-	if (strpos(SPECIAL_CHARACTERS, $password[$i]) !== false)
-	{
-		$bHasSpecialCharacter = true;
-		break;
+		die();
+	} catch (PDOException $e) {
+		echo $e->getMessage();
 	}
+} else {
+	// TODO: return to index
+	// header("Location: ../index.php")
+	echo "Error: bad registration";
 }
-if ($bHasSpecialCharacter !== true) {return false;}
-*/
 
 
 ?>
