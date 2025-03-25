@@ -1,9 +1,0 @@
-
-
-I assume that services are commands that are run? They could also be servers running in the background
-
-HTML post and get requests can be made through forms. These are a way to interact with the API.
-
-We can also program our own ways to get at the API using JS.
-
-Serving webpages through XAMPP is pretty easy. We just need html links

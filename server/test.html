@@ -4,7 +4,7 @@
 <body>
 
 
-    <form action="/server/login.php" method="post">
+    <form action="/server/register.php" method="post">
         <label for="fullname">Full Name:</label><br>
         <input type="text" id="fullname" name="fullname"><br><br>
       
@@ -20,77 +20,10 @@
         <input type="submit" value="Submit">
       </form>
 
-
-
-
-
-
     <button id="login" type="button">login</button>
     <button id="register" type="button">register</button>
 
     <p id="responseText"></p>
 
-    <script>
-        const login = document.getElementById('login');
-        login.addEventListener('click', () => {
-            fetch(`/server/login.php`, {
-                method: "POST",
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    'username' : document.getElementById("username").value(),
-                    'password' : document.getElementById("password").value(),
-                    'fullName' : document.getElementById("fullname").value(),
-                    'email'    : document.getElementById("email").value(),
-                })
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.text();
-                })
-                .then((text) => {
-                    console.log('Response Text: ', text);
-                    document.getElementById('responseText').textContent = text;
-                })
-                .catch(error => {
-                    console.error('Fetch error: ', error);
-                })
-        });//~ addEventListener
-
-
-
-        const register = document.getElementById('register');
-        register.addEventListener('click', () => {
-            fetch(`/server/register.php`, {
-                method: "POST",
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    'username': 'Arthur',
-                    'password': 'scharf'
-                })
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.text();
-                })
-                .then((text) => {
-                    console.log('Response Text: ', text);
-                    document.getElementById('responseText').textContent = text;
-                })
-                .catch(error => {
-                    console.error('Fetch error: ', error);
-                })
-        });//~ addEventListener
-
-
-
-    </script>
 </body>
 </html>
