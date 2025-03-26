@@ -2,7 +2,6 @@
 
 require_once "db.php";
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	$username = $_POST["username"];
@@ -10,9 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	$fullName = $_POST["fullname"];
 	$email    = $_POST["email"];
 
-
 	// -- Checking -- //
-	// TODO: check for duplicate usernames
 	$query = "SELECT * FROM users where username = ?;";
 	$stmt  = $pdo->prepare($query);
 	$user = $stmt->execute([$username]);
@@ -23,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	}
 
 	try{
-
 		$query = "INSERT INTO users (username, password, fullName, email) VALUES (?, ?, ?, ?);";
 
 		$stmt = $pdo->prepare($query);
@@ -31,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		$stmt->execute([$username, $password, $fullName, $email]);
 
 		// -- Freeing resources -- //
-		$pdo = null;
 		$pdo = null;
 
 		die();
@@ -42,8 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	header("Location: ../frontend/index.html");
 	echo "Error: bad registration";
 }
-
-
 ?>
 
 
