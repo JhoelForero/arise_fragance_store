@@ -18,8 +18,42 @@
         <input type="submit" value="Submit">
       </form>
 
-    <button id="login" type="button">login</button>
-    <button id="register" type="button">register</button>
+      <p id="result_text">Results goes here</p>
+
+    <button id="req" type="button">Request Products</button>
+    <button id="req2" type="button">Request Products</button>
+
+    <Script>
+
+      document.getElementById('req').addEventListener('click',
+        (event) => {
+          let queryString = new URLSearchParams({
+              startIdx: 5,
+              endIdx: 10
+            });
+
+          console.log('./productsByIndex.php?' + queryString.toString());
+
+          fetch('./productsByIndex.php?' + queryString.toString(), {
+            method: 'GET',
+          }).then(response => {
+            return response.json();
+          })
+          .then(body => console.log(body));
+        }//~ handler
+      );
+      
+      document.getElementById('req2').addEventListener('click',
+        (event) => {
+          const id = 7;
+          fetch(`./productsById.php?id=${id}`, {
+            method: 'GET',
+          }).then(response => response.json())
+          .then(console.log);
+        }
+      )
+
+    </Script>
 </body>
 </html>
 
