@@ -23,6 +23,7 @@
     <button id="req" type="button">Products By Index</button>
     <button id="req2" type="button">Product By ID</button>
     <button id="req3" type="button">Product By Name</button>
+    <button id="req4" type="button">Insert Cart Item</button>
 
     <Script>
 
@@ -60,7 +61,20 @@
           }).then(response => response.json())
           .then(console.log);
         }
-      )
+      );
+
+      document.getElementById('req4').addEventListener('click', 
+        (event) => {
+          fetch("./cart.php", {
+            method: "POST",
+            headers: {
+              'Content-Type' : 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({userId: 1, productId: 3})
+          }).then(response => response.json())
+          .then(console.log);
+        }
+      );
 
     </Script>
 </body>

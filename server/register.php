@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		$pdo = null;
 		die();
 	} catch (PDOException $e) {
-		echo $e->getMessage();
+		echo json_encode($e->getMessage());
 		die();
 	}
 }
