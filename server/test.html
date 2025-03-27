@@ -20,25 +20,24 @@
 
       <p id="result_text">Results goes here</p>
 
-    <button id="req" type="button">Request Products</button>
-    <button id="req2" type="button">Request Products</button>
+    <button id="req" type="button">Products By Index</button>
+    <button id="req2" type="button">Product By ID</button>
+    <button id="req3" type="button">Product By Name</button>
 
     <Script>
 
+
       document.getElementById('req').addEventListener('click',
         (event) => {
+          // Creating Query String
           let queryString = new URLSearchParams({
               startIdx: 5,
-              endIdx: 10
+              endIdx: 9
             });
-
-          console.log('./productsByIndex.php?' + queryString.toString());
-
+          // sending request
           fetch('./productsByIndex.php?' + queryString.toString(), {
             method: 'GET',
-          }).then(response => {
-            return response.json();
-          })
+          }).then( response => { return response.json(); } )
           .then(body => console.log(body));
         }//~ handler
       );
@@ -46,8 +45,18 @@
       document.getElementById('req2').addEventListener('click',
         (event) => {
           const id = 7;
-          fetch(`./productsById.php?id=${id}`, {
+          fetch(`./productById.php?id=${id}`, {
             method: 'GET',
+          }).then(response => response.json())
+          .then(console.log);
+        }
+      );
+
+      document.getElementById('req3').addEventListener('click', 
+        (event) => {
+          const name = "Jean Paul Gaultier Le Male Le Parfum EDP Intense";
+          fetch(`./productByName.php?name=${name}`, {
+            method: "GET"
           }).then(response => response.json())
           .then(console.log);
         }

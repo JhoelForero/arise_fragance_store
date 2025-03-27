@@ -30,8 +30,7 @@ CREATE TABLE `users` (
   `password` varchar(30) NOT NULL,
   `fullName` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `phoneNumber` varchar(10) DEFAULT NULL,
-  `country` varchar(20) DEFAULT NULL,
+  `phoneNumber` varchar(10) DEFAULT NULL
   `birthDate` date DEFAULT NULL,
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

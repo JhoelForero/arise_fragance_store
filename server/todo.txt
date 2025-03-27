@@ -1,0 +1,25 @@
+[X] use isset for all the parameters being checked      X
+
+
+[X] Properly format replies so they respond with correct information
+    > Always json I think
+
+[x] map the json values to string names
+
+
+cart endpoint for db:
+ - get cart
+ - delete element from my cart
+ - add element to my cart
+ - purchase == remove all
+
+
+
+
+                                ---- Stretch Goal ----
+
+todo: for registration and login: email instead of username
+
+login later: because nabila needs front end finished first
+
+Stock handling (out of stock, removal)

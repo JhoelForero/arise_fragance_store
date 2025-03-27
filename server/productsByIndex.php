@@ -1,59 +1,65 @@
 <?php
 
-    require_once "db.php";
 
-    if ($_SERVER['REQUEST_METHOD'] == "GET")
+
+header("Content-Type: application/json");
+
+if ($_SERVER['REQUEST_METHOD'] == "GET")
+{
+    $startIdx = isset($_GET['startIdx']) ? $_GET['startIdx'] : null;
+    $endIdx   = isset($_GET['endIdx'])   ? $_GET['endIdx']   : null;
+
+    if ($startIdx === null || $endIdx === null)
     {
+        echo json_encode("Error: failed to specify indices");
+        die();
+    }
 
-        // TODO: Get query string values for list of products
-        $startIdx = $_GET['startIdx'];
-        $endIdx   = $_GET['endIdx'];
+    try {
+        require_once "db.php";
 
-        /*
-        $response = array(
-            'startIdx' => $_GET['startIdx'],
-            'endIdx'   => $_GET['endIdx']
-        );
-        */
-
-        if ($startIdx && $endIdx)
-        {
-            // TODO: Query database
-            $qry = "
-                WITH NumberedProducts AS
-                (
-                    SELECT
-                        productId,
-                        productName,
-                        productDescription,
-                        productPrice,
-                        GENDER,
-                        BRAND,
-                        ROW_NUMBER() OVER (ORDER BY productId) AS RowNumber
-                    FROM
-                        products
-                )
+        // TODO: Query database
+        $qry = "
+            WITH NumberedProducts AS
+            (
                 SELECT
                     productId,
                     productName,
                     productDescription,
                     productPrice,
                     GENDER,
-                    BRAND
+                    BRAND,
+                    ROW_NUMBER() OVER (ORDER BY productId) AS RowNumber
                 FROM
-                    NumberedProducts
-                WHERE
-                    RowNumber BETWEEN ? AND ? 
-                    -- TEST VALUES
-            ";
+                    products
+            )
+            SELECT
+                productId,
+                productName,
+                productDescription,
+                productPrice,
+                GENDER,
+                BRAND
+            FROM
+                NumberedProducts
+            WHERE
+                RowNumber BETWEEN ? AND ? 
+                -- TEST VALUES
+        ";
+    
+        $stmt = $pdo->prepare($qry);
+        $stmt->execute([$startIdx, $endIdx]);
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC); // Object.keys(data.shareInfo[i]).length 
+        $pdo = null;
 
-            $stmt = $pdo->prepare($qry);
-            $stmt->execute([$startIdx, $endIdx]);
-            $products = $stmt->fetchAll();
-
-            header("Content-Type: application/json");
-            echo json_encode($products);
-            die();
-        }
+        echo json_encode($products);
+        die();
+    } catch (PDOException $e)
+    {
+        echo $e->json_encode($e->getMessage());
+        die();
     }
+} 
+
+echo json_encode("Error: Incorrect method: use GET");
 ?>
