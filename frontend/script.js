@@ -46,7 +46,7 @@ for (let i = 0; i < accordionBtn.length; i++) {
     this.classList.toggle('active');
   });
 }
-
+/*
 // ---------------------
 // FILTERS & SEARCH
 // ---------------------
@@ -82,10 +82,11 @@ function filterProducts() {
     product.style.display = (genderMatch && brandMatch && searchMatch) ? "block" : "none";
   });
 }
-
+*/
 // -----------------------------
 // CART FUNCTIONALITY + STORAGE
 // -----------------------------
+/*
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -159,7 +160,7 @@ function updateMiniCart() {
     });
   });
 }
-
+*/
 // ---------------------
 // MINI CART DESKTOP HOVER
 // ---------------------
@@ -187,6 +188,7 @@ if (cartIcon && miniCart) {
 // ------------------------
 // PROCEED TO CART PAGE
 // ------------------------
+/*
 document.querySelector(".view-cart-btn").addEventListener("click", () => {
   window.location.href = "/mybag.html";
 });
@@ -194,7 +196,7 @@ document.querySelector(".view-cart-btn").addEventListener("click", () => {
 document.querySelector(".checkout-btn").addEventListener("click", () => {
   window.location.href = "/mybag.html";
 });
-
+*/
 // ------------------------
 // USER DROPDOWN DESKTOP
 // ------------------------

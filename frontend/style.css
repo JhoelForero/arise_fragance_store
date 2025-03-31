@@ -17,7 +17,7 @@ body {
   scroll-behavior: smooth;
   /* Add padding for fixed header and mobile bottom nav */
   padding-top: 60px;
-  padding-bottom: 70px; /* space for bottom nav */
+  
 }
 
 img {
@@ -736,6 +736,9 @@ header {
 
   .header-user-actions {
     display: none;
+  }
+  body{
+    padding-bottom: 70px; /* space for bottom nav */
   }
 }
 

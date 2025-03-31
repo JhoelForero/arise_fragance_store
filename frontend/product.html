@@ -8,15 +8,19 @@
   <title>Arise - Fragrances</title>
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="/logo/Arise .png" type="image/x-icon">
+  <link rel="shortcut icon" href="logo/Arise .png" type="image/x-icon">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="/product.css">
+  <link rel="stylesheet" href="product.css">
   
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Script connection DB-->
+    <script src="connectionServer.js"></script>
+    <script src="jquery.js"></script>
 </head>
 
 <body>
@@ -29,8 +33,8 @@
   <div class="header-top">
     
     <!-- Logo -->
-    <a href="/" class="site-logo">
-      <img src="/logo/arise.png" alt="Arise Logo">
+    <a href="index.html" class="site-logo">
+      <img src="logo/arise.png" alt="Arise Logo">
     </a>
 
     <!-- User and Cart Actions -->
@@ -39,18 +43,19 @@
       <!-- User Icon + Dropdown -->
       <div class="user-wrapper">
         <button class="action-btn" id="userIcon">
-          <ion-icon name="person-outline"></ion-icon>
+          <img src="images/userIcon.svg" alt="Arise Logo" style="width: 27px;">
         </button>
         <div class="user-dropdown" id="userDropdown">
-          <p>Welcome, <strong id="usernameDisplay">Guest</strong></p>
-          <button class="login-btn" onclick="window.location.href='/login.html'">Login</button>
+          
+          <p style="margin-bottom: 10px;">Welcome, <strong id="usernameDisplay"></strong></p>
+          <button class="login-btn" onclick="buttonForLog()" id="login-logoutButton"></button>
         </div>
       </div>
 
       <!-- Cart Icon + Mini Cart -->
       <div class="cart-wrapper">
         <button class="action-btn" id="cartIcon">
-          <ion-icon name="bag-handle-outline"></ion-icon>
+          <img src="images/shoppingIcon.svg" alt="Arise Logo" style="width: 29px;">
           <span class="count" id="cartCount">0</span>
         </button>
         <div class="mini-cart" id="miniCart">
@@ -78,64 +83,16 @@
     <div class="product-page">
 
       <!-- Left: Product Image -->
-      <div class="product-image">
-        <img src="/images/product1.jpg" alt="Jean Paul Gaultier Le Male Elixir Parfum" />
+      <div class="product-image" id="product-image">
+        
       </div>
 
       <!-- Right: Product Details -->
-      <div class="product-details">
-        <nav class="breadcrumb">
-          Home / Mens Retail Bottles / Jean Paul Gaultier Le Male Elixir Parfum
-        </nav>
-
-        <h1 class="product-title">Jean Paul Gaultier Le Male Elixir Parfum</h1>
-        <p class="price">$150.00</p>
-        <p class="installments">or 4 interest-free payments of $58.25 with <strong>Afterpay</strong></p>
-
-        <div class="rating">★★★★★  reviews</div>
-
-        <div class="price-box">
-          <label>PRICE</label>
-          <p class="main-price">$150.00</p>
-        </div>
-
-        <div class="quantity-cart">
-          <div class="quantity-selector">
-            <button>-</button>
-            <input type="text" value="1" readonly>
-            <button>+</button>
-          </div>
-          <button class="add-to-cart">ADD TO CART</button>
-        </div>
-
-        <div class="authenticity">
-          <p><strong>✅ 100% Authentic</strong><br>Every decant and full-size bottle we offer is genuine, sourced directly from trusted fragrance suppliers.</p>
-        </div>
-
-        <div class="description">
-          <h3>Description</h3>
-          <p>
-            Jean Paul Gaultier Le Male Elixir Parfum is an intense and seductive Amber Fougere fragrance for men. 
-            A fresh blend of lavender and mint meets the warmth of vanilla, benzoin, honey, tobacco, and tonka bean 
-            for a bold and alluring scent.
-          </p>
-          <ul>
-            <li><strong>Concentration:</strong> Extrait de parfum</li>
-            <li><strong>Gender:</strong> Men</li>
-            <li><strong>Scent Accord:</strong> Sweet and Gourmand</li>
-            <li><strong>Prominent Notes:</strong> Vanilla, Honey, Tonka Bean, and Lavender</li>
-            <li><strong>Season:</strong> Fall and Winter</li>
-            <li><strong>Occasion:</strong> Evening and Night Out</li>
-            <li><strong>Perfumer:</strong> Quentin Bisch</li>
-          </ul>
-
-          <h3>Fragrance Notes</h3>
-          <ul>
-            <li><strong>Top:</strong> Lavender and Mint</li>
-            <li><strong>Heart:</strong> Vanilla and Benzoin</li>
-            <li><strong>Base:</strong> Honey, Tonka Bean and Tobacco</li>
-          </ul>
-        </div>
+      <script>
+        getIndividualProduct();
+      </script>
+      <div id="product-details" class="product-details">
+        
       </div>
     </div>
   </div>
@@ -292,4 +249,3 @@
 
 </body>
 </html>
-

@@ -1,65 +1,80 @@
 <?php
-/*
-Expects
-	{
-		username: <username>
-		password: <password>
-	}
-*/
+header('Content-Type: application/json');
+session_start();
 
-
-
+if (isset($_SESSION['userId']) && $_SESSION['userId']){
+	http_response_code(300);
+	echo json_encode([
+	'redirect' => true
+	]);
+	exit();
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	// $body = json_decode(file_get_contents('php://input'), true);		// read-only stream that allows you to read raw data from the request body
 
-	$username = $_POST["username"];
-	$password = $_POST["password"];
-	
+	$input = json_decode(file_get_contents('php://input'), true);
+	require_once "db.php";
 	try {
-		require_once "db.php";	// create db connection
+		if (empty($input['email'])) throw new Exception('Email is required', 400);
+		if (empty($input['password'])) throw new Exception('Password is required', 400);
 
-		$query = "SELECT * FROM users WHERE username = ?"; // ''??
+		$email = filter_var(trim($input['email']), FILTER_SANITIZE_EMAIL);
+		$password = trim($input['password']);
+
+			// create db connection
+
+		$query = "SELECT userId, email, password FROM users WHERE :email = email";
 		$stmt = $pdo->prepare($query);
-
-		$stmt->execute([$username]);
-		
+		$stmt->bindValue(':email', $email, PDO::PARAM_STR);
+		$stmt->execute();
 		$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-		if ($user)
-		{
-			$str = "";
-			if ($user['loggedIn'])
-			{
-				echo "logged in";
-			} else {
-				$query = "UPDATE users set loggedIn = 1 where username = $username";
-				$stmt = $pdo->prepare($query);
-				$stmt->execute([$username]);
-			}
+		if ($user && password_verify($password, $user['password'])) {
+			$_SESSION['userId'] = $user['userId'];
+			http_response_code(201);
+			echo json_encode([
+			'success' => true
+			]);
+			// -- Freeing resources -- //
+			$pdo = null;
+			exit();
 		}
-		
-
-		
-
-		// -- Freeing up resources -- //
-		$pdo = null;
-		$stmt = null;
-
-		// header("Location: ../index.php"); // Send user to front page
-
-		die();
+		else{
+			throw new PDOException('The provided email or password is incorrect. Please try again.',500);
+		}
 	} catch (PDOException $e) {
-		echo $e->getMessage();
-		// header("Location: ../index.php");
+		http_response_code($e->getCode() ?: 500);
+			echo json_encode([
+			'success' => false,
+			'error' => [
+				'type' => 'invalid_request',
+				'message'=> $e->getMessage()
+			]
+			]);
+			// -- Freeing resources -- //
+			$pdo = null;
+		exit();
+	}
+	catch (Exception $e) {
+		http_response_code($e->getCode() ?:$e->getCode() ?:500);
+		echo json_encode([
+		'success' => false,
+		'error' => [
+			'type' => 'Unknown_exception',
+			'message'=> $e->getMessage()
+		]
+		]);
 	}
 
-	//json_encode();
-
-	echo $outStr;
-
 } else {
-	// TODO: return to index
-	//header("Location: ../index.php"); // If user tries to get here without sending the form
+	http_response_code(400);
+	echo json_encode([
+		'success' => false,
+		'error' => [
+			'type' => 'Bad Request',
+			'message' => 'Request Should be made as POST'
+		]
+	]);
 }
 ?>

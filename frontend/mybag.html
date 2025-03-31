@@ -5,25 +5,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Bag - Arise</title>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <!-- Script connection DB-->
+    <script src="connectionServer.js"></script>
+    <script src="jquery.js"></script>
 </head>
 
 <body>
   <header>
     <div class="header-top">
-      <a href="/" class="site-logo">
-        <img src="/logo/arise.png" alt="Arise Logo">
+      <a href="index.html" class="site-logo">
+        <img src="logo/arise.png" alt="Arise Logo">
       </a>
     </div>
   </header>
 
-  <main class="checkout-container" style="margin-top: 100px; padding: 40px 20px; max-width: 1000px; margin-left: auto; margin-right: auto;">
+  <main class="checkout-container" style="margin-top: 100px; padding: 40px 20px; max-width: 1000px; margin-left: auto; margin-right: auto; display:block;">
     <h2 style="text-align: center; font-size: 28px; margin-bottom: 30px; color: #b30000;">My Bag</h2>
 
-    <form class="checkout-form" style="display: flex; flex-wrap: wrap; gap: 40px;">
-      <!-- Billing Info -->
+    <form class="checkout-form" style=" gap: 40px;">
+      <!-- Billing Info 
       <div style="flex: 1; min-width: 300px;">
         <h3 style="margin-bottom: 15px;">Billing Information</h3>
         <label>Full Name</label>
@@ -51,7 +55,7 @@
           <option value="Other">Other</option>
         </select>
       </div>
-
+    -->
       <!-- Order Summary -->
       <div style="flex: 1; min-width: 300px;">
         <h3 style="margin-bottom: 15px;">Order Summary</h3>
