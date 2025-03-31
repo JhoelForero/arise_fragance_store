@@ -1,5 +1,5 @@
 
-const LOCALHOSTDIR = "http://localhost/assignment2%20-%20Copy";
+const LOCALHOSTDIR = "http://localhost/assignment2";
 
 var batch = 1;
 var search = "";

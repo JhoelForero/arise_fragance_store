@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `assignment2_web` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `assignment2_web`;
 -- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: assignment2_web
@@ -26,15 +24,11 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `userId` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(30) NOT NULL,
-  `password` varchar(30) NOT NULL,
-  `fullName` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `phoneNumber` varchar(10) DEFAULT NULL,
-  `country` varchar(20) DEFAULT NULL,
-  `birthDate` date DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `username` varchar(20) NOT NULL,
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +37,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (3,'jhoelforeroyate@gmail.com','$2y$10$IbgKOD2FqPvgIRvd7BglROfPcY/FHTAtgPujg3639XaKAHr5i9IZK','Jhoel :3');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-24 20:34:21
+-- Dump completed on 2025-03-31 12:45:55
