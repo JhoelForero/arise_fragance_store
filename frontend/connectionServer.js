@@ -1,5 +1,5 @@
 
-const LOCALHOSTDIR = "http://localhost/assignment2";
+const LOCALHOSTDIR = "http://localhost/assignment2%20-%20Copy";
 
 var batch = 1;
 var search = "";
@@ -279,17 +279,19 @@ async function proceedLogin(myemail, mypassword){
 // ---------------------
 // Sets user functionalities starting by defining whether user is logged in or not
 // ---------------------
-async function isLogged(){
+async function isLogged(source){
    
     var textreq = `${LOCALHOSTDIR}/server/userFunctionalities.php?isLogged=`;
     const response = await fetch(textreq);
     const Logged = await response.json();
 
     isLoggedIn = Logged['isLogged'];
-
-    getUserForSession();
+    if(source.localeCompare('index')){
+        getUserForSession();
+    }
     
-    if(isLoggedIn)getCartItems();
+    
+    if(isLoggedIn)getCartItems(source);
 }
 
 async function getUserForSession(){
@@ -331,7 +333,7 @@ async function addToCart(itemId){
         if (!successReq['success']){
             console.error(successReq['error']);
         }
-        getCartItems();
+        getCartItems('index');
     }
     else{
         window.location.replace('signup.html');
@@ -346,14 +348,13 @@ async function removeItemCart(itemId){
         if (!successReq['success']){
             console.error(successReq['error']);
         }
-        getCartItems();
     }
     else{
         window.location.replace('signup.html');
     }
 }
 
-async function getCartItems(){
+async function getCartItems(source){
 
     var textreq = `${LOCALHOSTDIR}/server/userFunctionalities.php?getCartItems=`;
     const response = await fetch(textreq);
@@ -363,32 +364,88 @@ async function getCartItems(){
         $('#items-container-cart').empty();
         let itemFeatures = successReq['cartItems'];
         $('#cartCount').append(itemFeatures.length);
-        itemFeatures.forEach((item, index) => {
-            $('#items-container-cart').append(`            
-                <div class="mini-cart-item">
-                  <div class="mini-cart-product">
-                    <img src="${item.linkImage}" alt="${item.productName}" class="mini-cart-img">
-                    <div class="mini-cart-info">
-                      <p>${item.productName}</p>
-                      <p>${item.productPrice}</p>
-                      <p>Qty: ${item.quantity}</p>
-                    </div>
-                    <button class="remove-btn" onclick="removeItemCart(${item.wishId})">&times;</button>
-                  </div>
-                </div>`);
-        });
-    }  
+        
+        if(source.localeCompare("index") == 0) setCartItemsIndex(itemFeatures);
+        if(source.localeCompare("bag") == 0) setCartItemsMyBag(itemFeatures);
+    }
+    
 }
 
-async function proceedCheckout(){
+function setCartItemsIndex(itemFeatures){
+    $('#items-container-cart').empty();
+    itemFeatures.forEach((item, index) => {
+        $('#items-container-cart').append(`            
+            <div class="mini-cart-item">
+              <div class="mini-cart-product">
+                <img src="${item.linkImage}" alt="${item.productName}" class="mini-cart-img">
+                <div class="mini-cart-info">
+                  <p>${item.productName}</p>
+                  <p>${item.productPrice}</p>
+                  <p>Qty: ${item.quantity}</p>
+                </div>
+                <button class="remove-btn" onclick="removeItemCart(${item.wishId})">&times;</button>
+              </div>
+            </div>`);
+    });
+    $('#cartSubtotal').empty();
+    if ($('#items-container-cart').text() == ''){
+        $('#cartSubtotal').append('CAD $0.00');
+    }
+    else{
+        getTotal();
+    }
+}
+
+function setCartItemsMyBag(itemFeatures){
+    $('#products-box').empty();
+    itemFeatures.forEach((item, index) => {
+        $('#products-box').append(`            
+            <div class="order-item" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span>${item.quantity} ${item.productName}</span>
+            <span>$${item.productPrice}</span>
+          </div>`);
+    });
+    $('#cartSubtotal').empty();
+    if ($('#products-box').text() == ''){
+        $('#cartSubtotal').append('$0.00');
+    }
+    else{
+        
+        
+        getTotal();
+    }
+}
+
+async function proceedCheckout(source){
     if(isLoggedIn){
     var textreq = `${LOCALHOSTDIR}/server/userFunctionalities.php?checkout=`;
     const response = await fetch(textreq);
-    const successReq = await response.text();
+    const successReq = await response.json();
     if (!successReq['success']){
         console.error(successReq['error']);
     }
-    getCartItems();
+    getCartItems(source);
+    }
+    else{
+        window.location.replace('signup.html');
+    }   
+}
+
+async function getTotal(){
+    if(isLoggedIn){
+    var textreq = `${LOCALHOSTDIR}/server/userFunctionalities.php?getTotal=`;
+    const response = await fetch(textreq);
+    const successReq = await response.json();
+    
+        if (!successReq['success']){
+            console.error(successReq['error']);
+        }
+        else{
+            
+            $('#cartSubtotal').append('CAD $' + successReq['total'][0]['total']);
+        }
+        
+        
     }
     else{
         window.location.replace('signup.html');

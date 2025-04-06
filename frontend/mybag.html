@@ -12,6 +12,9 @@
     <!-- Script connection DB-->
     <script src="connectionServer.js"></script>
     <script src="jquery.js"></script>
+    <script>
+       isLogged('bag');
+    </script>
 </head>
 
 <body>
@@ -59,23 +62,18 @@
       <!-- Order Summary -->
       <div style="flex: 1; min-width: 300px;">
         <h3 style="margin-bottom: 15px;">Order Summary</h3>
-        <div class="order-summary-box" style="background: #f9f9f9; padding: 20px; border-radius: 10px;">
-          <div class="order-item" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-            <span>Product 1</span>
-            <span>$150.00</span>
+        <div class="order-summary-box" id="order-summary-box" style="background: #f9f9f9; padding: 20px; border-radius: 10px;">
+          <div id="products-box">
           </div>
-          <div class="order-item" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-            <span>Product 2</span>
-            <span>$130.00</span>
-          </div>
+          
           <hr>
           <div class="order-total" style="display: flex; justify-content: space-between; font-weight: bold; margin-top: 10px;">
             <span>Total</span>
-            <span>$280.00</span>
+            <span id="cartSubtotal"></span>
           </div>
         </div>
 
-        <button type="submit" style="margin-top: 20px; width: 100%; padding: 12px; background-color: #b30000; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer;">Place Order</button>
+        <button type="button" onclick="proceedCheckout('bag')" style="margin-top: 20px; width: 100%; padding: 12px; background-color: #b30000; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer;">Place Order</button>
       </div>
     </form>
   </main>

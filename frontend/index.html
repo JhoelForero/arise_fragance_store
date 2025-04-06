@@ -42,7 +42,7 @@
 
       <!-- General Scripts-->
        <script>
-        isLogged();
+        isLogged('index');
 
        </script>
        <!-- User Icon + Dropdown -->
@@ -69,10 +69,10 @@
             <div id="items-container-cart" style="max-height: 200px; overflow-y: auto;">
               
             </div>
-            <p>Subtotal: <strong>CAD $<span id="cartSubtotal">0.00</span></strong></p>
+            <p>Subtotal: <strong><span id="cartSubtotal"></span></strong></p>
             
             <!-- Updated buttons with links -->
-            <button class="view-cart-btn" onclick="proceedCheckout()">View Bag</button>
+            <button class="view-cart-btn" onclick="window.location.href = `${LOCALHOSTDIR}/frontend/mybag.html`;">View Bag</button>
             <button class="checkout-btn" onclick="proceedCheckout()">Proceed to Checkout</button>
           </div>
       

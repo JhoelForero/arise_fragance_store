@@ -222,7 +222,39 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
             exit();
         }
     }
+    if (isset($_GET["getTotal"])) {
+        try {
+            if (!empty($_GET["getTotal"])) throw new Exception('No values required for this request', 400);
+            if (!isset($_SESSION['userId'])) throw new Exception('User not logged in', 401);
+            
+            require_once "db.php";
+            $query = "SELECT SUM(products.productPrice) as total
+		                FROM shopping_cart
+		                INNER JOIN products ON products.productId = shopping_cart.productId 
+		                WHERE shopping_cart.userId = :userId";
 
+            $stmt = $pdo->prepare($query);
+            $stmt->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            http_response_code(200);
+            echo json_encode([
+                'success' => true,
+                'total' => $result
+            ]);
+            $pdo = null;
+            exit();
+        } catch (Exception $e) {
+            http_response_code($e->getCode() ?: 500);
+            echo json_encode([
+                'success' => false,
+                'error' => $e->getMessage()
+            ]);
+            $pdo = null;
+            exit();
+        }
+    }
 }
 
 ?>
