@@ -1,4 +1,4 @@
-# Assignment2
+# Arise Fragance Store
 
 This is a e-commerce platform with functionalities to users such as user management, product management, purchases, wish lists and personalized recommendations.
 
