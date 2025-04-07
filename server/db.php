@@ -1,7 +1,7 @@
 <?php
 
 	$db_user = "root";
-	$db_password = "HSYpyn95";
+	$db_password = "";
 	$dbname = "assignment2_web";
 
 	try {
